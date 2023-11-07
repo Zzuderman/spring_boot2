@@ -2,7 +2,6 @@ package com.spring_boot.spring_boot2.controller;
 
 import com.spring_boot.spring_boot2.model.User;
 import com.spring_boot.spring_boot2.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping()
+@RequestMapping
 public class UserController {
+
     private final UserService userService;
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String addUser(@ModelAttribute("user")  User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "new_user";
         }
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String updateUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit_user";
         }
